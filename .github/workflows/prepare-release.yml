@@ -1,0 +1,30 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version_part:
+        description: 'The part of the version to update (patch, minor or major'
+        required: true
+        default: 'minor'
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    steps:
+    - name: Bump the version number
+      id: bump_version
+      run: |
+        pip install bump2version
+        bump2version --current-version 0.2.1 minor kedro_mlflow/__init__.py
+        ::set-output name=package_version::$(cat kedro_mlflow/__init__.py | grep -Po  "\d\.\d\.\d")
+    - name: Update the CHANGELOG according to 'Keep a Changelog'
+      uses: thomaseizinger/keep-a-changelog-new-release@v1
+      with:
+        version: {{ bump_version.outputs.package_version }}
