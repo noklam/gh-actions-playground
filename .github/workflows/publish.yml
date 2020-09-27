@@ -35,10 +35,10 @@ jobs:
     - name: Set dynamically package version as environment variable # see https://github.com/actions/create-release/issues/39
       # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
       run: |
-        echo "::set-env name=PACKAGE_VERSION::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d\.\d\.\d')"
+        echo "::set-env name=PACKAGE_VERSION::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d+\.\d+\.\d+')"
     - name: Create temporary file with the body content for the release
       run: |
-        grep -Poz "## \[${{env.PACKAGE_VERSION}}] - \d{4}-\d{2}-\d{2}[\S\s]+?(?=## \[\d\.\d\.\d\]|\[.+\]:)" CHANGELOG.md > release_body.md
+        grep -Poz "## \[${{env.PACKAGE_VERSION}}] - \d{4}-\d{2}-\d{2}[\S\s]+?(?=## \[\d+\.\d+\.\d+\]|\[.+\]:)" CHANGELOG.md > release_body.md
     - name: Create Release # https://github.com/actions/create-release
       id: create_release
       uses: actions/create-release@v1.1.4
