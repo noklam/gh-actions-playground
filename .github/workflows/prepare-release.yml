@@ -15,12 +15,13 @@ jobs:
       PYTHON_PACKAGE: fake_package
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}  # necessary for autocmmit: https://github.com/stefanzweifel/git-auto-commit-action#example
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-        ref: ${{ github.head_ref }}
-    - name: Bump the version number
+    - name: Bump the version number  # bump2version is a maintained fork of original bumpversion
       id: bump_version
       run: |
         pip install bump2version
