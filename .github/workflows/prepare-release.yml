@@ -45,7 +45,6 @@ jobs:
       with:
         commit_message: "[GITHUB ACTION] - Prepare release ${{ steps.bump_version.outputs.package_version }}"
         branch: release/candidate-${{ steps.bump_version.outputs.package_version }}
-        push_options: -u origin release/candidate-${{ steps.bump_version.outputs.package_version }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: See commit
