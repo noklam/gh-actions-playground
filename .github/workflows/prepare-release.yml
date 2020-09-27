@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
     inputs:
       version_part:
-        description: 'The part of the version to update (patch, minor or major)
+        description: The part of the version to update (patch, minor or major)
         required: true
         default: 'minor'
 jobs:
