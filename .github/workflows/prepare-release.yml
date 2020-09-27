@@ -29,13 +29,13 @@ jobs:
       uses: thomaseizinger/keep-a-changelog-new-release@v1
       with:
         version: ${{ steps.bump_version.outputs.package_version }}
-    - name: Commit changes to a release/candidate branch
+    - name: Commit changes to a release-candidate branch
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git checkout -b release/candidate-${{ steps.bump_version.outputs.package_version }}
+        git checkout -b release-candidate-${{ steps.bump_version.outputs.package_version }}
         git commit -am "Release ${{ steps.bump_version.outputs.package_version }} - Bump version and CHANGELOG"
-        git push -u origin release/candidate-${{ steps.bump_version.outputs.package_version }}
+        git push -u origin release-candidate-${{ steps.bump_version.outputs.package_version }}
     - name: Open a PR to merge the release candidate to master
       uses: vsoch/pull-request-action@1.0.6
       env:
