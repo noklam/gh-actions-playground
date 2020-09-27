@@ -17,7 +17,7 @@ jobs:
     - name: Checkout the repo
       uses: actions/checkout@v2
       with: 
-        fetch-depth: 0  # necessary to enbale merging, all the history is needed
+        fetch-depth: 0  # necessary to enable merging, all the history is needed
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -29,22 +29,16 @@ jobs:
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git branch -a
-        git log -3
-        git fetch origin develop
-        git branch -a
         git checkout -b develop --track origin/develop 
-        git branch -a
-        git log -3 
         git merge master
         git push
     - name: Set dynamically package version as environment variable # see https://github.com/actions/create-release/issues/39
       # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
       run: |
-        echo "::set-env name=PACKAGE_VERSION::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d\.\d\.\d')"
+        echo "::set-env name=PACKAGE_VERSION::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d+\.\d+\.\d+')"
     - name: Create temporary file with the body content for the release
       run: |
-        grep -Poz "## \[${{env.PACKAGE_VERSION}}] - \d{4}-\d{2}-\d{2}[\S\s]+?(?=## \[\d\.\d\.\d\]|\[.+\]:)" CHANGELOG.md > release_body.md
+        grep -Poz "## \[${{env.PACKAGE_VERSION}}] - \d{4}-\d{2}-\d{2}[\S\s]+?(?=## \[\d+\.\d+\.\d+\]|\[.+\]:)" CHANGELOG.md > release_body.md
     - name: Create Release # https://github.com/actions/create-release
       id: create_release
       uses: actions/create-release@v1.1.4
