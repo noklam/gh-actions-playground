@@ -17,7 +17,6 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    steps:
     - name: Bump the version number
       id: bump_version
       run: |
@@ -27,4 +26,4 @@ jobs:
     - name: Update the CHANGELOG according to 'Keep a Changelog'
       uses: thomaseizinger/keep-a-changelog-new-release@v1
       with:
-        version: {{ bump_version.outputs.package_version }}
+        version: "{{ steps.bump_version.outputs.package_version }}"
