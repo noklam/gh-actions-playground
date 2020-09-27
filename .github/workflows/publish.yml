@@ -34,26 +34,26 @@ jobs:
       run: |
         grep -Poz "## \[${{env.PACKAGE_VERSION}}] - \d{4}-\d{2}-\d{2}[\S\s]+?(?=## \[\d\.\d\.\d\]|\[.+\]:)" CHANGELOG.md > release_body.md
         cat release_body.md
-    # - name: Create Release # https://github.com/actions/create-release
-    #   id: create_release
-    #   uses: actions/create-release@v1.1.4
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-    #   with:
-    #     tag_name: ${{ env.PACKAGE_VERSION }}
-    #     release_name: Release ${{ env.PACKAGE_VERSION }}
-    #     body: Test 
-    #     # body_path: ./release_body.md 
-    #     draft: false
-    #     prerelease: false
-    # - name: Rollback Release in case of run failure
-    #     if: failure() && steps.create_release.outputs.id != ''
-    #     uses: author/action-rollback@stable
-    #     with:
-    #       # Using a known release ID
-    #       id: ${{ steps.create_release.outputs.id }}
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create Release # https://github.com/actions/create-release
+      id: create_release
+      uses: actions/create-release@v1.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ env.PACKAGE_VERSION }}
+        release_name: Release ${{ env.PACKAGE_VERSION }}
+        body: Test 
+        # body_path: ./release_body.md 
+        draft: false
+        prerelease: false
+    - name: Rollback Release in case of run failure
+        if: failure() && steps.create_release.outputs.id != ''
+        uses: author/action-rollback@stable
+        with:
+          # Using a known release ID
+          id: ${{ steps.create_release.outputs.id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     # - name: Publish distribution to PyPI  # official action from python maintainers
     #   if: startsWith(github.ref, 'refs/tags') # publish to Pypi only if current commit is tagged
     #   uses: pypa/gh-action-pypi-publish@master
