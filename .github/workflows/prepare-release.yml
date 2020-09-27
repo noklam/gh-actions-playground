@@ -36,7 +36,7 @@ jobs:
         git checkout -b release/candidate-${{ steps.bump_version.outputs.package_version }}
         git commit -am "Release ${{ steps.bump_version.outputs.package_version }} - Bump version and CHANGELOG"
         git push -u origin release/candidate-${{ steps.bump_version.outputs.package_version }}
-    - name: pull-request-action
+    - name: Open a PR to merge the release candidate to master
       uses: vsoch/pull-request-action@1.0.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,6 +44,15 @@ jobs:
         PULL_REQUEST_FROM_BRANCH: release/candidate-${{ steps.bump_version.outputs.package_version }}
         PULL_REQUEST_TITLE: "Release candidate ${{ steps.bump_version.outputs.package_version }}"
         PULL_REQUEST_BODY: "Bump version and CHANGELOG for next release."
+        # PULL_REQUEST_ASSIGNEES: "${{ github.repository_owner }}"
+    - name: pull-request-action
+      uses: vsoch/pull-request-action@1.0.6
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PULL_REQUEST_BRANCH: master
+        PULL_REQUEST_FROM_BRANCH: release/candidate-${{ steps.bump_version.outputs.package_version }}
+        PULL_REQUEST_TITLE: "Release ${{ steps.bump_version.outputs.package_version }}"
+        PULL_REQUEST_BODY: "Once the release candidate will be merged back into develop, this one can be merged to master"
         # PULL_REQUEST_ASSIGNEES: "${{ github.repository_owner }}"
 
          
