@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [0.5.2] - 2020-09-27
+
+### Added
+
+-   Fake add 0.5.2
+
+### Changed
+
+-   Fake changed 0.5.2
+
+### Fixed
+
+-   Fake fix 0.5.2
+
 ## [0.4.0] - 2020-09-27
 
 ## [0.3.0] - 2020-09-27
