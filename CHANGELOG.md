@@ -2,21 +2,21 @@
 
 ## [Unreleased]
 
-## [0.5.2] - 2020-09-27
+## [0.5.3] - 2020-09-27
 
 ### Added
 
--   Fake add 0.5.2
+-   Fake add 0.5.3
 
 ### Changed
 
--   Fake changed 0.5.2
+-   Fake changed 0.5.3
 
 ### Fixed
 
--   Fake fix 0.5.2
+-   Fake fix 0.5.3
 
-## [0.5.2] - 2020-09-27
+## [0.5.3] - 2020-09-27
 
 ## [0.3.0] - 2020-09-27
 
@@ -43,8 +43,8 @@
 
 [0.1.0]: https://github.com/Galileo-Galilei/gh-actions-playground/releases/tag/0.1.0
 
-[Unreleased]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.5.2...HEAD
+[Unreleased]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.5.3...HEAD
 
-[0.5.2]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.3.0...0.5.2
+[0.5.3]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.3.0...0.5.3
 
 [0.3.0]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.1.0...0.3.0
