@@ -29,9 +29,15 @@ jobs:
       uses: thomaseizinger/keep-a-changelog-new-release@v1
       with:
         version: ${{ steps.bump_version.outputs.package_version }}
-    - name: Commit and push changes to develop
+    - name: Commit changes to develop
+      uses: stefanzweifel/git-auto-commit-action@v2.3.0
+      with:
+        commit_message: [GITHUB ACTION] - Prepare release ${{ steps.bump_version.outputs.package_version }}
+        branch: ${{ github.head_ref}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: See commit
       run: |
-        echo ${{ steps.bump_version.outputs.package_version }}
-        head -100 ./CHANGELOG.md
-
+        git log -n 3
+         
         
