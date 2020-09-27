@@ -40,20 +40,19 @@ jobs:
       uses: vsoch/pull-request-action@1.0.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PULL_REQUEST_BRANCH: develop
-        PULL_REQUEST_FROM_BRANCH: release/candidate-${{ steps.bump_version.outputs.package_version }}
+        PULL_REQUEST_BRANCH: master
+        PULL_REQUEST_FROM_BRANCH: release-candidate-${{ steps.bump_version.outputs.package_version }}
         PULL_REQUEST_TITLE: "Release candidate ${{ steps.bump_version.outputs.package_version }}"
         PULL_REQUEST_BODY: "Bump version and CHANGELOG for next release."
         # PULL_REQUEST_ASSIGNEES: "${{ github.repository_owner }}"
-    - name: pull-request-action
-      uses: vsoch/pull-request-action@1.0.6
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PULL_REQUEST_BRANCH: master
-        PULL_REQUEST_FROM_BRANCH: release/candidate-${{ steps.bump_version.outputs.package_version }}
-        PULL_REQUEST_TITLE: "Release ${{ steps.bump_version.outputs.package_version }}"
-        PULL_REQUEST_BODY: "Once the release candidate will be merged back into develop, this one can be merged to master"
-        # PULL_REQUEST_ASSIGNEES: "${{ github.repository_owner }}"
-
-         
-        
+    # - name: Open a PR to merge the release candidate to master
+    #   id: pr_master
+    #   uses: vsoch/pull-request-action@1.0.6
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     PULL_REQUEST_BRANCH: master
+    #     PULL_REQUEST_FROM_BRANCH: develop
+    #     PULL_REQUEST_TITLE: "Release ${{ steps.bump_version.outputs.package_version }}"
+    #     PULL_REQUEST_DRAFT: True
+    #     PULL_REQUEST_BODY: "This PR must not be merged until #${{ steps.pr_develop.outputs.pull_request_number }} is merged in develop."
+    #     # PULL_REQUEST_ASSIGNEES: "${{ github.repository_owner }}"
