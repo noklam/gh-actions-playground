@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.8.0] - 2020-09-27
+
 ## [0.7.0] - 2020-09-27
 
 ## [0.6.0] - 2020-09-27
@@ -47,7 +49,9 @@
 
 [0.1.0]: https://github.com/Galileo-Galilei/gh-actions-playground/releases/tag/0.1.0
 
-[Unreleased]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.7.0...HEAD
+[Unreleased]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.8.0...HEAD
+
+[0.8.0]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.7.0...0.8.0
 
 [0.7.0]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/0.6.0...0.7.0
 
