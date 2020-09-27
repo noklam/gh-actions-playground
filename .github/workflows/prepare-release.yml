@@ -1,3 +1,5 @@
+name: create-release-candidate
+
 on:
   workflow_dispatch:
     inputs:
@@ -5,6 +7,7 @@ on:
         description: The part of the version to update (patch, minor or major)
         required: true
         default: 'minor'
+
 jobs:
   prepare-release:
     runs-on: ubuntu-latest
@@ -12,7 +15,7 @@ jobs:
       matrix:
         python-version: [3.7]
     env:
-      PYTHON_PACKAGE: fake_package
+      PYTHON_PACKAGE: gh_actions_playground
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -29,13 +32,13 @@ jobs:
       uses: thomaseizinger/keep-a-changelog-new-release@v1
       with:
         version: ${{ steps.bump_version.outputs.package_version }}
-    - name: Commit changes to a release/candidate branch
+    - name: Commit changes to a release-candidate branch
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git checkout -b release/candidate-${{ steps.bump_version.outputs.package_version }}
+        git checkout -b release-candidate-${{ steps.bump_version.outputs.package_version }}
         git commit -am "Release ${{ steps.bump_version.outputs.package_version }} - Bump version and CHANGELOG"
-        git push -u origin release/candidate-${{ steps.bump_version.outputs.package_version }}
+        git push -u origin release-candidate-${{ steps.bump_version.outputs.package_version }}
     - name: Open a PR to merge the release candidate to master
       uses: vsoch/pull-request-action@1.0.6
       env:
