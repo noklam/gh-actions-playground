@@ -27,9 +27,12 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         git branch -a
-        git fetch
+        git log -3 
+        git fetch origin develop
         git branch -a
         git checkout -b develop --track origin/develop 
+        git branch -a
+        git log -3 
         git merge master
         git push
     - name: Set dynamically package version as environment variable # see https://github.com/actions/create-release/issues/39
