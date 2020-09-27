@@ -22,6 +22,13 @@ jobs:
     - name: Build package dist from source # A better way will be : https://packaging.python.org/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/ but pep 517 is still marked as experimental
       run: |
         python setup.py sdist
+    - name:  Merge back to develop
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git checkout -b develop --track origin/develop 
+        git merge master
+        git push
     - name: Set dynamically package version as environment variable # see https://github.com/actions/create-release/issues/39
       # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
       run: |
@@ -40,19 +47,12 @@ jobs:
         body_path: ./release_body.md 
         draft: false
         prerelease: false
-    - name:  Merge back to develop
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git checkout develop
-        git merge master
-        git push
     - name: Rollback Release in case of run failure
       if: failure() && steps.create_release.outputs.id != ''
       uses: author/action-rollback@stable
       with:
         # Using a known release ID
-        id: ${{ steps.create_release.outputs.id }}
+        release_id: ${{ steps.create_release.outputs.id }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish distribution to Test PyPI  # official action from python maintainers
