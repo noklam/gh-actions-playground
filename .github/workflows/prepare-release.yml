@@ -25,7 +25,6 @@ jobs:
         pip install bump2version
         bump2version minor $PYTHON_PACKAGE/__init__.py
         echo "::set-output name=package_version::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d\.\d\.\d')"
-        echo "${{ steps.bump_version.outputs.package_version }}"
     - name: Update the CHANGELOG according to 'Keep a Changelog'
       uses: thomaseizinger/keep-a-changelog-new-release@v1
       with:
@@ -33,5 +32,6 @@ jobs:
     - name: Commit and push changes to develop
       run: |
         echo ${{ steps.bump_version.outputs.package_version }}
+        head -100 ./CHANGELOG.md
 
         
