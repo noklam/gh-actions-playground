@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='gh_actions_playground',
-    version='0.5.7',
+    version='0.5.8',
     author='Author Name',
     author_email='author@gmail.com',
     description='Tests for CI',
