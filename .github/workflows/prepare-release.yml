@@ -33,7 +33,6 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
       with:
         commit_message: "[GITHUB ACTION] - Prepare release ${{ steps.bump_version.outputs.package_version }}"
-        branch: ${{ github.head_ref}}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: See commit
