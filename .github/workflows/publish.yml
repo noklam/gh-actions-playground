@@ -29,7 +29,7 @@ jobs:
       # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
       id: release_var
       run: |
-        set-env name=PACKAGE_VERSION::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d\.\d\.\d')
+        echo "::set-env name=PACKAGE_VERSION::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d\.\d\.\d')"
         grep -Poz "## \[${{env.PACKAGE_VERSION}}] - \d{4}-\d{2}-\d{2}[\S\s]+?(?=## \[\d\.\d\.\d\]|\[.+\]:)" CHANGELOG.md > release_body.md
         cat release_body.md
     - name: Create Release # https://github.com/actions/create-release
