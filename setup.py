@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fake_package',
-    version='0.5.4',
+    version='0.5.5',
     author='Author Name',
     author_email='author@gmail.com',
     description='Tests for CI',
