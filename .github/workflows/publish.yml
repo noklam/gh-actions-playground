@@ -1,0 +1,49 @@
+# # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+# name: publish
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         python-version: [3.7]
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Set up Python ${{ matrix.python-version }}
+#       uses: actions/setup-python@v1
+#       with:
+#         python-version: ${{ matrix.python-version }}
+#     - name: Build package dist from source # A better way will be : https://packaging.python.org/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/ but pep 517 is still marked as experimental
+#       run: |
+#         python setup.py sdist
+#     - name: Get dynamically package version and release content  # see https://github.com/actions/create-release/issues/39
+#       # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
+#       run: |
+#         pip install -e .
+#         set-env name=TAG_NAME::$(python -c "import kedro_mlflow; print(kedro_mlflow.__version__)")
+#         set-env name=RELEASE_BODY::$(magic here)
+#     - name: Create Release # https://github.com/actions/create-release
+#       id: create_release
+#       uses: actions/create-release@v1.1.4
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+#       with:
+#         tag_name: ${{ env.TAG_NAME }}
+#         release_name: Release ${{ env.TAG_NAME }}
+#         body: ${{ env.RELEASE_BODY }}
+#         draft: false
+#         prerelease: false
+#     - name: Publish distribution to PyPI  # official action from python maintainers
+#       if: startsWith(github.ref, 'refs/tags') # publish to Pypi only if current commit is tagged
+#       uses: pypa/gh-action-pypi-publish@master
+#       with:
+#         user: __token__
+#         password: ${{ secrets.pypi_password }}
+#         verbose: true  # trace if the upload fails
