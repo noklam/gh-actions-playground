@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+        ref: ${{ github.head_ref }}
     - name: Bump the version number
       id: bump_version
       run: |
@@ -33,6 +34,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
       with:
         commit_message: "[GITHUB ACTION] - Prepare release ${{ steps.bump_version.outputs.package_version }}"
+        branch: release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: See commit
