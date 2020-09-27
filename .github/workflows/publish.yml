@@ -40,7 +40,8 @@ jobs:
       with:
         tag_name: ${{ env.PACKAGE_VERSION }}
         release_name: Release ${{ env.PACKAGE_VERSION }}
-        body_path: ./release_body.md 
+        body: Test 
+        # body_path: ./release_body.md 
         draft: false
         prerelease: false
     # - name: Publish distribution to PyPI  # official action from python maintainers
