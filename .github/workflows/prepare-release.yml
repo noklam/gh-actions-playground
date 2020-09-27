@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
     inputs:
       version_part:
-        description: 'The part of the version to update (patch, minor or major'
+        description: 'The part of the version to update (patch, minor or major)
         required: true
         default: 'minor'
 jobs:
@@ -24,7 +24,8 @@ jobs:
       run: |
         pip install bump2version
         bump2version minor $PYTHON_PACKAGE/__init__.py
-        ::set-output name=package_version::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  "\d\.\d\.\d")
+        echo $(cat $PYTHON_PACKAGE/__init__.py | grep -Po  "\d\.\d\.\d")
+        echo "::set-output name=package_version::$(cat $PYTHON_PACKAGE/__init__.py | grep -Po  '\d\.\d\.\d')"
     - name: Update the CHANGELOG according to 'Keep a Changelog'
       uses: thomaseizinger/keep-a-changelog-new-release@v1
       with:
