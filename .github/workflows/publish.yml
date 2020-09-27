@@ -15,7 +15,7 @@ jobs:
       matrix:
         python-version: [3.7]
     env:
-      PYTHON_PACKAGE: fake_package
+      PYTHON_PACKAGE: gh_actions_playground
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}

@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='fake_package',
-    version='0.5.6',
+    name='gh_actions_playground',
+    version='0.5.7',
     author='Author Name',
     author_email='author@gmail.com',
     description='Tests for CI',
