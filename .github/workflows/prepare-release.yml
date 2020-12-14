@@ -54,7 +54,7 @@ jobs:
         PULL_REQUEST_ASSIGNEES: "${{ github.repository_owner }}"
     - name: Commit the changes
       run: |
-        git commit -am "CLOSE #${{ steps.open_pr.outputs.pull_request_number }}  - Bump version and CHANGELOG for release ${{ steps.bump_version.outputs.package_version }}"
+        git commit -am "FIX #${{ steps.open_pr.outputs.pull_request_number }}  - Bump version and CHANGELOG for release ${{ steps.bump_version.outputs.package_version }}"
         git push
     # - name: Open a PR to merge the release to master
     #   id: pr_master
