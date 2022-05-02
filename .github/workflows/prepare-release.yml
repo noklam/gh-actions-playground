@@ -4,9 +4,28 @@ on:
   workflow_dispatch:
     inputs:
       version_part:
+        type: choice
         description: The part of the version to update (patch, minor or major)
+        options:
+        - patch
+        - minor
+        - major
         required: true
         default: 'minor'
+          inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
+      environment:
+        type: environment
 
 jobs:
   prepare-release:
@@ -25,7 +44,6 @@ jobs:
     - name: Validate inputs
       run: |
         echo "INPUT_VERSION_PART: ${{ github.event.inputs.version_part }}"
-        python -c "if '${{ github.event.inputs.version_part }}' not in ['patch', 'minor', 'major']:   raise ValueError(\"'${{ github.event.inputs.version_part }}' must be one of ['patch', 'minor', 'major'])\")" 
     - name: Bump the version number  # bump2version is a maintained fork of original bumpversion
       id: bump_version
       run: |
