@@ -12,7 +12,6 @@ on:
         - major
         required: true
         default: 'minor'
-          inputs:
       name:
         type: choice
         description: Who to greet
