@@ -45,6 +45,7 @@ jobs:
         body_path: ./release_body.md
         draft: false
         prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Rollback Release in case of run failure
       if: failure() && steps.create_release.outputs.id != ''
       uses: author/action-rollback@stable
