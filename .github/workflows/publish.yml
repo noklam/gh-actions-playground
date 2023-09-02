@@ -58,7 +58,7 @@ jobs:
     name: Upload release to PyPI
     runs-on: ubuntu-latest
     environment:
-      name: pypi
+      name: testpypi
       url: https://pypi.org/p/gh-actions-playground
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
