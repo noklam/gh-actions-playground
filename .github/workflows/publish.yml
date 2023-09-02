@@ -55,11 +55,11 @@ jobs:
     #     verbose: true  # trace if the upload fails
   testpypi-publish:
     needs: github-release
-    name: Upload release to PyPI
+    name: Upload release to Test PyPI
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://pypi.org/p/gh-actions-playground
+      url: https://test.pypi.org/p/gh-actions-playground
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
