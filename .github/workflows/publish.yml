@@ -29,12 +29,12 @@ jobs:
         grep -Poz "## \[${{steps.set_package_version.outputs.PACKAGE_VERSION}}] - \d{4}-\d{2}-\d{2}[\S\s]+?(?=## \[\d+\.\d+\.\d+\]|\[.+\]:)" CHANGELOG.md > release_body.md
     - name: Create Release # https://github.com/actions/create-release
       id: create_release
-      uses: actions/create-release@v1.1.4
+      uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
         tag_name: ${{ steps.set_package_version.outputs.PACKAGE_VERSION }}
-        release_name: Release ${{ steps.set_package_version.outputs.PACKAGE_VERSION }}
+        name: Release ${{ steps.set_package_version.outputs.PACKAGE_VERSION }}
         body_path: ./release_body.md
         draft: false
         prerelease: false
