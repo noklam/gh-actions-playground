@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [1.4.0] - 2020-12-13
+## [1.5.0] - 2020-12-13
 
 ## [1.1.0] - 2020-12-13
 
@@ -57,9 +57,9 @@
 -   Fake add 1
 -   Fake add 2
 
-[Unreleased]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/1.4.0...HEAD
+[Unreleased]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/1.5.0...HEAD
 
-[1.4.0]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/1.1.0...1.4.0
+[1.5.0]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/1.1.0...1.5.0
 
 [1.1.0]: https://github.com/Galileo-Galilei/gh-actions-playground/compare/1.0.0...1.1.0
 
