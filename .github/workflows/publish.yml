@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYTHON_PACKAGE: gh_actions_playground
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/gh-actions-playground
+    # environment:
+    #   name: testpypi
+    #   url: https://test.pypi.org/p/gh-actions-playground
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
-    outputs:
-      PACKAGE_VERSION: ${{ steps.set_package_version.outputs.PACKAGE_VERSION }}
+    # outputs:
+    #   PACKAGE_VERSION: ${{ steps.set_package_version.outputs.PACKAGE_VERSION }}
     steps:
     - name: Checkout the repo
       uses: actions/checkout@v3
